@@ -15,7 +15,7 @@ async function main() {
     },
   });
   const contract = new Contract(client);
-  await contract.GetPositions();
+  await contract.DisplayPositions();
 }
 
 main();

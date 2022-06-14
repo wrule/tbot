@@ -49,4 +49,16 @@ class Contract {
     }
     return positions.filter((position) => position.contracts > 0);
   }
+
+  public async DisplayPositions() {
+    const positions = await this.GetPositions();
+    positions.forEach((position) => {
+      console.log(
+        position.symbol,
+        position.side,
+        position.contracts,
+        position.unrealizedPnl,
+      );
+    });
+  }
 }
