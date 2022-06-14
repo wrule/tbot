@@ -1,5 +1,6 @@
 import { binance } from 'ccxt';
 import { Direction, Side } from '../struct/common';
+import fs from 'fs';
 
 export
 class Contract {
@@ -35,5 +36,14 @@ class Contract {
       undefined,
       { positionSide: direction, },
     );
+  }
+
+  public async GetPosition(symbol?: string) {
+    if (symbol) {
+
+    } else {
+      const positions = await this.client.fetchPositions();
+      fs.writeFileSync('.tmp.json', JSON.stringify(positions, null, 2));
+    }
   }
 }
