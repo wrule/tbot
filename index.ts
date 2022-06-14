@@ -16,6 +16,9 @@ async function main() {
   });
   const contract = new Contract(client);
   await contract.DisplayPositions();
+  console.log('');
+  await contract.Close('LINK/USDT', 'LONG', 2);
+  await contract.DisplayPositions();
 }
 
 main();
