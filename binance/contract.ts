@@ -38,12 +38,15 @@ class Contract {
     );
   }
 
-  public async GetPosition(symbol?: string) {
+  public async GetPositions(symbol?: string) {
+    let positions: any[] = [];
     if (symbol) {
-
+      positions = await this.client.fapiPrivateGetPositionRisk({
+        symbol: symbol.replace('/', ''),
+      });
     } else {
-      const positions = await this.client.fetchPositions();
-      fs.writeFileSync('.tmp.json', JSON.stringify(positions, null, 2));
+      positions = await this.client.fetchPositions();
     }
+    return positions.filter((position) => position.contracts > 0);
   }
 }
