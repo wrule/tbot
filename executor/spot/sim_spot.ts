@@ -20,18 +20,20 @@ class SimSpot {
   public Buy(
     in_funds: number,
     price: number,
+    time: number,
   ) {
     if (in_funds <= this.funds) {
       this.funds -= in_funds;
       const out_assets = in_funds / price * this.fee_multiplier;
       this.assets += out_assets;
-      const tn = {
+      const tn: ITransaction = {
+        time,
+        price,
         in_name: this.fund_name,
         in_amount: in_funds,
         out_name: this.asset_name,
         out_amount: out_assets,
-        price,
-      } as ITransaction;
+      };
       return tn;
     }
     return null;
@@ -40,18 +42,20 @@ class SimSpot {
   public Sell(
     in_assets: number,
     price: number,
+    time: number,
   ) {
     if (in_assets <= this.assets) {
       this.assets -= in_assets;
       const out_funds = in_assets * price * this.fee_multiplier;
       this.funds += out_funds;
-      const tn = {
+      const tn: ITransaction = {
+        time,
+        price,
         in_name: this.asset_name,
         in_amount: in_assets,
         out_name: this.fund_name,
         out_amount: out_funds,
-        price,
-      } as ITransaction;
+      };
       return tn;
     }
     return null;
