@@ -5,7 +5,7 @@ class SimSpot {
   public constructor(
     private readonly init_funds = 100,
     private readonly fee = 0.001,
-    private readonly bill = false,
+    private readonly record_transaction = false,
     private readonly fund_name = 'MONEY',
     private readonly asset_name = 'ASSET',
   ) {
@@ -15,7 +15,7 @@ class SimSpot {
   private funds!: number;
   private assets!: number;
   private fee_multiplier!: number;
-  private bills: ITransaction[] = [];
+  private transactions: ITransaction[] = [];
 
   public Buy(
     in_funds: number,
@@ -36,6 +36,9 @@ class SimSpot {
         out_name: this.asset_name,
         out_amount: out_assets,
       };
+      if (this.record_transaction) {
+        this.transactions.push(tn);
+      }
       return tn;
     }
     return null;
@@ -60,6 +63,9 @@ class SimSpot {
         out_name: this.fund_name,
         out_amount: out_funds,
       };
+      if (this.record_transaction) {
+        this.transactions.push(tn);
+      }
       return tn;
     }
     return null;
