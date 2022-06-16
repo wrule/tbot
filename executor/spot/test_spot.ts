@@ -1,7 +1,7 @@
 import { ITransaction } from './transaction';
 
 export
-class SimSpot {
+class TestSpot {
   public constructor(
     private readonly init_funds = 100,
     private readonly fee = 0.001,
