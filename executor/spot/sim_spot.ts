@@ -13,17 +13,29 @@ class SimSpot {
   private fee_multiplier!: number;
 
   public Buy(
-    amount: number,
+    in_funds: number,
     price: number,
   ) {
-
+    if (in_funds <= this.funds) {
+      this.funds -= in_funds;
+      const out_assets = in_funds / price * this.fee_multiplier;
+      this.assets += out_assets;
+      return [in_funds, out_assets, price];
+    }
+    return [0, 0, price];
   }
 
   public Sell(
-    amount: number,
+    in_assets: number,
     price: number,
   ) {
-
+    if (in_assets <= this.assets) {
+      this.assets -= in_assets;
+      const out_funds = in_assets * price * this.fee_multiplier;
+      this.funds += out_funds;
+      return [in_assets, out_funds, price];
+    }
+    return [0, 0, price];
   }
 
   public Reset() {
