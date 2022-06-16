@@ -11,7 +11,8 @@ async function main() {
     enableRateLimit: true,
   });
   const spot = new BinanceSpot('LINK/USDT', client);
-  await spot.Buy(11, 0);
+  // await spot.Buy(11, 0);
+  await spot.Sell(3.76, 0);
 }
 
 main();

@@ -34,12 +34,18 @@ class BinanceSpot {
     return null;
   }
 
-  public Sell(
+  public async Sell(
     in_assets: number,
     price: number,
     time: number,
   ) {
-    return null;
+    const order = await this.client.createMarketOrder(
+      this.symbol,
+      'sell',
+      in_assets,
+    );
+    fs.writeFileSync('.tmp.json', JSON.stringify(order, null, 2));
+    return order;
   }
 
   public SellAll(
