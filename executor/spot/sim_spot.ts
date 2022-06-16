@@ -28,8 +28,10 @@ class SimSpot {
       this.assets += out_assets;
       const tn: ITransaction = {
         time,
+        expected_price: price,
         price,
         in_name: this.fund_name,
+        expected_in_amount: in_funds,
         in_amount: in_funds,
         out_name: this.asset_name,
         out_amount: out_assets,
@@ -50,8 +52,10 @@ class SimSpot {
       this.funds += out_funds;
       const tn: ITransaction = {
         time,
+        expected_price: price,
         price,
         in_name: this.asset_name,
+        expected_in_amount: in_assets,
         in_amount: in_assets,
         out_name: this.fund_name,
         out_amount: out_funds,
