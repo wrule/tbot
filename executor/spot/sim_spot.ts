@@ -45,9 +45,16 @@ class SimSpot {
       this.assets -= in_assets;
       const out_funds = in_assets * price * this.fee_multiplier;
       this.funds += out_funds;
-      return [in_assets, out_funds, price];
+      const tn = {
+        in_name: this.asset_name,
+        in_amount: in_assets,
+        out_name: this.fund_name,
+        out_amount: out_funds,
+        price,
+      } as ITransaction;
+      return tn;
     }
-    return [0, 0, price];
+    return null;
   }
 
   public Reset() {
