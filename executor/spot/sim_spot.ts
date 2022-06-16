@@ -44,6 +44,13 @@ class SimSpot {
     return null;
   }
 
+  public BuyAll(
+    price: number,
+    time: number,
+  ) {
+    return this.Buy(this.funds, price, time);
+  }
+
   public Sell(
     in_assets: number,
     price: number,
@@ -69,6 +76,13 @@ class SimSpot {
       return tn;
     }
     return null;
+  }
+
+  public SellAll(
+    price: number,
+    time: number,
+  ) {
+    this.Sell(this.assets, price, time);
   }
 
   public Reset() {
