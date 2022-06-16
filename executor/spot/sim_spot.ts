@@ -4,6 +4,7 @@ class SimSpot {
   public constructor(
     private readonly init_funds = 100,
     private readonly fee = 0.001,
+    private readonly bill = false,
   ) {
     this.Reset();
   }
@@ -11,6 +12,7 @@ class SimSpot {
   private funds!: number;
   private assets!: number;
   private fee_multiplier!: number;
+  private bills: [boolean, number, number, number][] = [];
 
   public Buy(
     in_funds: number,
