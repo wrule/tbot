@@ -1,3 +1,4 @@
+import { ITransaction } from './transaction';
 
 export
 class SimSpot {
@@ -5,6 +6,8 @@ class SimSpot {
     private readonly init_funds = 100,
     private readonly fee = 0.001,
     private readonly bill = false,
+    private readonly fund_name = 'MONEY',
+    private readonly asset_name = 'ASSET',
   ) {
     this.Reset();
   }
@@ -12,7 +15,7 @@ class SimSpot {
   private funds!: number;
   private assets!: number;
   private fee_multiplier!: number;
-  private bills: [boolean, number, number, number][] = [];
+  private bills: ITransaction[] = [];
 
   public Buy(
     in_funds: number,
@@ -22,9 +25,16 @@ class SimSpot {
       this.funds -= in_funds;
       const out_assets = in_funds / price * this.fee_multiplier;
       this.assets += out_assets;
-      return [in_funds, out_assets, price];
+      const tn = {
+        in_name: this.fund_name,
+        in_amount: in_funds,
+        out_name: this.asset_name,
+        out_amount: out_assets,
+        price,
+      } as ITransaction;
+      return tn;
     }
-    return [0, 0, price];
+    return null;
   }
 
   public Sell(
