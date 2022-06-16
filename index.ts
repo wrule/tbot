@@ -1,5 +1,5 @@
 import { binance } from 'ccxt';
-import { Contract } from './binance/contract';
+import { BinanceSpot } from './executor/spot/binance_spot';
 import secret from './.secret.json';
 
 console.log('你好，世界');
@@ -9,16 +9,9 @@ async function main() {
     apiKey: secret.API_KEY,
     secret: secret.SECRET_KEY,
     enableRateLimit: true,
-    options: {
-      defaultType: 'future',
-      hedgeMode: true,
-    },
   });
-  const contract = new Contract(client);
-  await contract.DisplayPositions();
-  console.log('');
-  await contract.Close('LINK/USDT', 'LONG', 2);
-  await contract.DisplayPositions();
+  const spot = new BinanceSpot('LINK/USDT', client);
+  await spot.Buy(11, 0);
 }
 
 main();

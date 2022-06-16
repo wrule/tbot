@@ -1,19 +1,30 @@
 import { binance } from 'ccxt';
 import { ISpotExecutor } from '.';
+import fs from 'fs';
 
 export
-class BinanceSpot
-implements ISpotExecutor {
+class BinanceSpot {
   public constructor(
+    private readonly symbol: string,
     private readonly client: binance,
   ) { }
 
-  public Buy(
+  public async Buy(
     in_assets: number,
     price: number,
-    time: number,
+    time: number = Number(new Date()),
   ) {
-    return null;
+    const order = await this.client.createMarketOrder(
+      this.symbol,
+      'buy',
+      0,
+      undefined,
+      {
+        quoteOrderQty: in_assets,
+      },
+    );
+    fs.writeFileSync('.tmp.json', JSON.stringify(order, null, 2));
+    return order;
   }
 
   public BuyAll(
