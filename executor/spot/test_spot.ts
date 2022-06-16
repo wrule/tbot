@@ -1,7 +1,9 @@
+import { ISpotExecutor } from '.';
 import { ITransaction } from './transaction';
 
 export
-class TestSpot {
+class TestSpot
+implements ISpotExecutor {
   public constructor(
     private readonly init_funds = 100,
     private readonly fee = 0.001,
@@ -82,7 +84,7 @@ class TestSpot {
     price: number,
     time: number,
   ) {
-    this.Sell(this.assets, price, time);
+    return this.Sell(this.assets, price, time);
   }
 
   public Reset() {
