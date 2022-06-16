@@ -15,7 +15,7 @@ class TestSpot {
   private funds!: number;
   private assets!: number;
   private fee_multiplier!: number;
-  private transactions: ITransaction[] = [];
+  private transactions!: ITransaction[];
 
   public Buy(
     in_funds: number,
@@ -89,5 +89,6 @@ class TestSpot {
     this.funds = this.init_funds;
     this.assets = 0;
     this.fee_multiplier = 1 - this.fee;
+    this.transactions = [];
   }
 }
