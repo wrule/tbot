@@ -1,7 +1,9 @@
 
 export
 interface ITransaction {
-  time: number;
+  request_time: number;
+  transaction_time: number;
+  response_time: number;
   expected_price: number;
   price: number;
   in_name: string;
