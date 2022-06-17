@@ -15,9 +15,7 @@ class BinanceSpot {
   private target_name!: string;
   private source_name!: string;
 
-  public async Buy(
-    in_assets: number,
-  ) {
+  public async Buy(in_assets: number) {
     const order = await this.client.createMarketOrder(
       this.symbol,
       'buy',
@@ -37,12 +35,10 @@ class BinanceSpot {
     console.log('耗时', Number(new Date()) - old_time);
     const free: number = balance[this.source_name].free;
     console.log(this.source_name, free);
-    // return await this.Buy(free);
+    return await this.Buy(free);
   }
 
-  public async Sell(
-    in_assets: number,
-  ) {
+  public async Sell(in_assets: number) {
     const order = await this.client.createMarketOrder(
       this.symbol,
       'sell',
