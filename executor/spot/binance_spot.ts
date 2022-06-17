@@ -3,7 +3,8 @@ import { ISpotExecutor } from '.';
 import fs from 'fs';
 
 export
-class BinanceSpot {
+class BinanceSpot
+implements ISpotExecutor {
   public constructor(
     private readonly symbol: string,
     private readonly client: binance,
@@ -26,7 +27,7 @@ class BinanceSpot {
       },
     );
     fs.writeFileSync('.tmp.json', JSON.stringify(order, null, 2));
-    return order;
+    return null;
   }
 
   public async BuyAll() {
@@ -45,7 +46,7 @@ class BinanceSpot {
       this.client.amountToPrecision(this.symbol, in_assets),
     );
     fs.writeFileSync('.tmp.json', JSON.stringify(order, null, 2));
-    return order;
+    return null;
   }
 
   public async SellAll() {
