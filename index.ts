@@ -10,9 +10,10 @@ async function main() {
     secret: secret.SECRET_KEY,
     enableRateLimit: true,
   });
-  const spot = new BinanceSpot('LINK/USDT', client);
+  await client.loadMarkets();
+  const spot = new BinanceSpot('BTC/USDT', client);
   // await spot.Buy(11, 0);
-  await spot.BuyAll(0, 0);
+  await spot.BuyAll();
 }
 
 main();
