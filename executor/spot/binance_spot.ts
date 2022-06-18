@@ -55,7 +55,7 @@ implements ISpotExecutor {
     console.log('耗时', Number(new Date()) - old_time);
     const free: number = balance[this.source_name].free;
     console.log(this.source_name, free);
-    return await this.Buy(free);
+    return await this.Buy(free, 0);
   }
 
   public async Sell(in_assets: number) {
