@@ -36,6 +36,6 @@ function ArrayToKLine(
 ): KLine {
   return array.map((item, index) => ArrayToOHLCV(
     item,
-    confirmed === null ? index < array.length - 1 : confirmed,
+    confirmed == null ? index < array.length - 1 : confirmed,
   ));
 }

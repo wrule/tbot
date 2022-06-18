@@ -2,6 +2,7 @@ import { binance } from 'ccxt';
 import { BinanceSpot } from './executor/spot/binance_spot';
 import secret from './.secret.json';
 import { TwoLineCross } from './robot/spot/two_line_cross';
+import { ArrayToKLine } from './struct/ohlcv';
 
 console.log('你好，世界');
 
@@ -16,7 +17,8 @@ async function main() {
   const robot = new TwoLineCross(executor);
 
   const list = await client.fetchOHLCV('LINK/USDT', '1m', undefined, 500);
-  console.log(list);
+  const a = ArrayToKLine(list);
+  console.log(a[a.length - 1]);
 
   // const a = await spot.Buy(12);
   // console.log(a);
