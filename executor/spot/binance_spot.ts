@@ -16,6 +16,7 @@ implements ISpotExecutor {
 
   private target_name!: string;
   private source_name!: string;
+  private transactions!: ITransaction[];
 
   public async Buy(
     in_assets: number,
@@ -45,6 +46,7 @@ implements ISpotExecutor {
       out_name: this.target_name,
       out_amount: order.amount - (order.fee.currency === this.target_name ? order.fee.cost : 0),
     };
+    this.transactions.push(tn);
     return tn;
   }
 
@@ -81,6 +83,7 @@ implements ISpotExecutor {
       out_name: this.source_name,
       out_amount: order.cost - (order.fee.currency === this.source_name ? order.fee.cost : 0),
     };
+    this.transactions.push(tn);
     return tn;
   }
 
