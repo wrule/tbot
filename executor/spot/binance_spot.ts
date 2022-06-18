@@ -22,6 +22,7 @@ implements ISpotExecutor {
     in_assets: number,
     price?: number,
   ) {
+    try {
     const request_time = Number(new Date());
     const order = await this.client.createMarketOrder(
       this.symbol,
@@ -49,6 +50,10 @@ implements ISpotExecutor {
     this.transactions.push(tn);
     console.log(tn);
     return tn;
+    } catch (e) {
+      console.error(e);
+    }
+    return null;
   }
 
   public async BuyAll(price?: number) {
@@ -64,6 +69,7 @@ implements ISpotExecutor {
     in_assets: number,
     price?: number,
   ) {
+    try {
     const request_time = Number(new Date());
     const order = await this.client.createMarketOrder(
       this.symbol,
@@ -87,6 +93,10 @@ implements ISpotExecutor {
     this.transactions.push(tn);
     console.log(tn);
     return tn;
+    } catch (e) {
+      console.error(e);
+    }
+    return null;
   }
 
   public async SellAll(price?: number) {
