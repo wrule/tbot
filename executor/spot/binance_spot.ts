@@ -12,6 +12,7 @@ implements ISpotExecutor {
   ) {
     this.target_name = this.symbol.split('/')[0].trim();
     this.source_name = this.symbol.split('/')[1].trim();
+    this.transactions = [];
   }
 
   private target_name!: string;
