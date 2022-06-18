@@ -1,6 +1,7 @@
 import { binance } from 'ccxt';
 import { ISpotExecutor } from '.';
 import fs from 'fs';
+import { ITransaction } from './transaction';
 
 export
 class BinanceSpot
@@ -17,6 +18,7 @@ implements ISpotExecutor {
   private source_name!: string;
 
   public async Buy(in_assets: number) {
+    const request_time = Number(new Date());
     const order = await this.client.createMarketOrder(
       this.symbol,
       'buy',
@@ -26,6 +28,20 @@ implements ISpotExecutor {
         quoteOrderQty: this.client.costToPrecision(this.symbol, in_assets),
       },
     );
+    const response_time = Number(new Date());
+    const tn: ITransaction = {
+      side: 'buy',
+      request_time,
+      transaction_time: order.timestamp,
+      response_time,
+      expected_price: 0,
+      price: 0,
+      in_name: this.source_name,
+      expected_in_amount: 0,
+      in_amount: 0,
+      out_name: this.target_name,
+      out_amount: 0,
+    };
     fs.writeFileSync('.tmp.json', JSON.stringify(order, null, 2));
     return null;
   }
