@@ -16,14 +16,11 @@ async function main() {
   const executor = new BinanceSpot('LINK/USDT', client);
   const robot = new TwoLineCross(executor);
 
-  const list = await client.fetchOHLCV('LINK/USDT', '1m', undefined, 500);
-  const a = ArrayToKLine(list);
-  console.log(a[a.length - 1]);
-
-  // const a = await spot.Buy(12);
-  // console.log(a);
-  // const b = await spot.SellAll();
-  // console.log(b);
+  setInterval(async () => {
+    const list = await client.fetchOHLCV('LINK/USDT', '1m', undefined, 500);
+    const a = ArrayToKLine(list);
+    console.log(a[a.length - 1].time, a[a.length - 1].close);
+  }, 1000);
 }
 
 main();
