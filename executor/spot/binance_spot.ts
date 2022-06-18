@@ -17,7 +17,10 @@ implements ISpotExecutor {
   private target_name!: string;
   private source_name!: string;
 
-  public async Buy(in_assets: number) {
+  public async Buy(
+    in_assets: number,
+    price: number,
+  ) {
     const request_time = Number(new Date());
     const order = await this.client.createMarketOrder(
       this.symbol,
@@ -34,13 +37,13 @@ implements ISpotExecutor {
       request_time,
       transaction_time: order.timestamp,
       response_time,
-      expected_price: 0,
-      price: 0,
+      expected_price: price,
+      price: order.price,
       in_name: this.source_name,
-      expected_in_amount: 0,
-      in_amount: 0,
+      expected_in_amount: in_assets,
+      in_amount: order.cost,
       out_name: this.target_name,
-      out_amount: 0,
+      out_amount: order.amount,
     };
     fs.writeFileSync('.tmp.json', JSON.stringify(order, null, 2));
     return null;
