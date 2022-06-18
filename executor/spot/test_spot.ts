@@ -29,7 +29,10 @@ implements ISpotExecutor {
       const out_assets = in_funds / price * this.fee_multiplier;
       this.assets += out_assets;
       const tn: ITransaction = {
-        time,
+        side: 'buy',
+        request_time: time,
+        transaction_time: time,
+        response_time: time,
         expected_price: price,
         price,
         in_name: this.fund_name,
@@ -63,7 +66,10 @@ implements ISpotExecutor {
       const out_funds = in_assets * price * this.fee_multiplier;
       this.funds += out_funds;
       const tn: ITransaction = {
-        time,
+        side: 'sell',
+        request_time: time,
+        transaction_time: time,
+        response_time: time,
         expected_price: price,
         price,
         in_name: this.asset_name,
