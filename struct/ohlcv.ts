@@ -12,3 +12,19 @@ interface IOHLCV {
 
 export
 type KLine = IOHLCV[];
+
+export
+function ArrayToOHLCV(
+  array: number[],
+  confirmed?: boolean,
+) {
+  return {
+    time: array[0],
+    open: array[1],
+    high: array[2],
+    low: array[3],
+    close: array[4],
+    volume: array[5],
+    confirmed,
+  } as IOHLCV;
+}
