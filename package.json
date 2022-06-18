@@ -11,6 +11,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "@binance/connector": "^1.10.0",
     "@types/node": "^17.0.42",
     "ccxt": "^1.87.13",
     "tulind": "^0.8.20"
