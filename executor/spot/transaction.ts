@@ -1,6 +1,15 @@
+import { Side, Direction } from '../../struct/common';
 
 export
 interface ITransaction {
+  /**
+   * 买卖方向
+   */
+  side?: Side;
+  /**
+   * 多空方向
+   */
+  direction?: Direction;
   /**
    * 请求时间
    */
