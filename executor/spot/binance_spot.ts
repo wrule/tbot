@@ -48,13 +48,13 @@ implements ISpotExecutor {
     return tn;
   }
 
-  public async BuyAll() {
-    const old_time = Number(new Date());
+  public async BuyAll(price?: number) {
     const balance = await this.client.fetchBalance();
-    console.log('耗时', Number(new Date()) - old_time);
     const free: number = balance[this.source_name].free;
-    console.log(this.source_name, free);
-    return await this.Buy(free, 0);
+    if (free > 0) {
+      return await this.Buy(free, price);
+    }
+    return null;
   }
 
   public async Sell(in_assets: number) {
