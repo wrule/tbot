@@ -13,6 +13,7 @@ extends SpotRobot {
     last_slow: number,
     ohlcv: IOHLCV,
   ) {
+    console.log(prev_fast, prev_slow, last_fast, last_slow);
     if ( // 金叉检测
       (prev_fast <= prev_slow) &&
       (last_fast > last_slow)

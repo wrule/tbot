@@ -47,6 +47,7 @@ implements ISpotExecutor {
       out_amount: order.amount - (order.fee.currency === this.target_name ? order.fee.cost : 0),
     };
     this.transactions.push(tn);
+    console.log(tn);
     return tn;
   }
 
@@ -84,6 +85,7 @@ implements ISpotExecutor {
       out_amount: order.cost - (order.fee.currency === this.source_name ? order.fee.cost : 0),
     };
     this.transactions.push(tn);
+    console.log(tn);
     return tn;
   }
 
