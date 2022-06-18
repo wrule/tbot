@@ -43,10 +43,10 @@ implements ISpotExecutor {
       expected_in_amount: in_assets,
       in_amount: order.cost,
       out_name: this.target_name,
-      out_amount: order.amount,
+      out_amount: order.amount - (order.fee.currency === this.target_name ? order.fee.cost : 0),
     };
     fs.writeFileSync('.tmp.json', JSON.stringify(order, null, 2));
-    return null;
+    return tn;
   }
 
   public async BuyAll() {
