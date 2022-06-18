@@ -22,21 +22,41 @@ async function main() {
     const list = await client.fetchOHLCV('LINK/USDT', '1m', undefined, 10);
     const kline = ArrayToKLine(list).filter((item) => item.confirmed);
     const closes = kline.map((item) => item.close);
+    let fast_line: number[] = [];
+    let slow_line: number[] = [];
     tulind.indicators.sma.indicator(
       [closes],
       [3],
       (err: any, result: any) => {
-        console.log(3, result[0]);
+        fast_line = result[0];
       },
     );
     tulind.indicators.sma.indicator(
       [closes],
       [8],
       (err: any, result: any) => {
-        console.log(8, result[0]);
+        slow_line = result[0];
       },
     );
-    console.log(Number(new Date()));
+    if (
+      fast_line.length >= 2 &&
+      slow_line.length >= 2 &&
+      kline.length > 0
+    ) {
+      const
+        prev_fast = fast_line[fast_line.length - 2],
+        prev_slow = slow_line[slow_line.length - 2],
+        last_fast = fast_line[fast_line.length - 1],
+        last_slow = slow_line[slow_line.length - 1];
+      const ohlcv = kline[kline.length - 1];
+      robot.Check(
+        prev_fast,
+        prev_slow,
+        last_fast,
+        last_slow,
+        ohlcv,
+      );
+    }
   }, 1000);
 }
 
