@@ -19,7 +19,7 @@ implements ISpotExecutor {
 
   public async Buy(
     in_assets: number,
-    price: number,
+    price?: number,
   ) {
     const request_time = Number(new Date());
     const order = await this.client.createMarketOrder(
@@ -37,7 +37,7 @@ implements ISpotExecutor {
       request_time,
       transaction_time: order.timestamp,
       response_time,
-      expected_price: price,
+      expected_price: price as number,
       price: order.price,
       in_name: this.source_name,
       expected_in_amount: in_assets,
@@ -45,7 +45,6 @@ implements ISpotExecutor {
       out_name: this.target_name,
       out_amount: order.amount - (order.fee.currency === this.target_name ? order.fee.cost : 0),
     };
-    fs.writeFileSync('.tmp.json', JSON.stringify(order, null, 2));
     return tn;
   }
 
