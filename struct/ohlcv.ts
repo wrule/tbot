@@ -28,3 +28,14 @@ function ArrayToOHLCV(
     confirmed,
   } as IOHLCV;
 }
+
+export
+function ArrayToKLine(
+  array: number[][],
+  confirmed?: boolean,
+): KLine {
+  return array.map((item, index) => ArrayToOHLCV(
+    item,
+    confirmed === null ? index < array.length - 1 : confirmed,
+  ));
+}
