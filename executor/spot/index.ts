@@ -1,10 +1,10 @@
 import { ITransaction } from './transaction';
 
 export
-type A = (ITransaction | null);
+type ReturnTransaction = (ITransaction | null);
 
 export
-type B = (Promise<A> | A);
+type ReturnTransactionAS = (Promise<ReturnTransaction> | ReturnTransaction);
 
 export
 interface ISpotExecutor {
@@ -12,21 +12,21 @@ interface ISpotExecutor {
     in_asset: number,
     price?: number,
     time?: number,
-  ): B;
+  ): ReturnTransactionAS;
 
   BuyAll(
     price?: number,
     time?: number,
-  ): B;
+  ): ReturnTransactionAS;
 
   Sell(
     in_asset: number,
     price?: number,
     time?: number,
-  ): B;
+  ): ReturnTransactionAS;
 
   SellAll(
     price?: number,
     time?: number,
-  ): B;
+  ): ReturnTransactionAS;
 }
