@@ -19,21 +19,21 @@ async function main() {
   const robot = new TwoLineCross(executor);
 
   setInterval(async () => {
-    const list = await client.fetchOHLCV('LINK/USDT', '1m', undefined, 10);
+    const list = await client.fetchOHLCV('LINK/USDT', '1m', undefined, 500);
     const kline = ArrayToKLine(list).filter((item) => item.confirmed);
     const closes = kline.map((item) => item.close);
     let fast_line: number[] = [];
     let slow_line: number[] = [];
     tulind.indicators.sma.indicator(
       [closes],
-      [3],
+      [10],
       (err: any, result: any) => {
         fast_line = result[0];
       },
     );
     tulind.indicators.sma.indicator(
       [closes],
-      [8],
+      [30],
       (err: any, result: any) => {
         slow_line = result[0];
       },
