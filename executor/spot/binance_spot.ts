@@ -57,14 +57,31 @@ implements ISpotExecutor {
     return null;
   }
 
-  public async Sell(in_assets: number) {
+  public async Sell(
+    in_assets: number,
+    price?: number,
+  ) {
+    const request_time = Number(new Date());
     const order = await this.client.createMarketOrder(
       this.symbol,
       'sell',
       this.client.amountToPrecision(this.symbol, in_assets),
     );
-    fs.writeFileSync('.tmp.json', JSON.stringify(order, null, 2));
-    return null;
+    const response_time = Number(new Date());
+    const tn: ITransaction = {
+      side: 'sell',
+      request_time,
+      transaction_time: order.timestamp,
+      response_time,
+      expected_price: price as number,
+      price: order.price,
+      in_name: this.target_name,
+      expected_in_amount: in_assets,
+      in_amount: order.amount,
+      out_name: this.source_name,
+      out_amount: order.cost - (order.fee.currency === this.source_name ? order.fee.cost : 0),
+    };
+    return tn;
   }
 
   public async SellAll() {
