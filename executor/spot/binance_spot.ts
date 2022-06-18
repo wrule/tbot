@@ -84,9 +84,12 @@ implements ISpotExecutor {
     return tn;
   }
 
-  public async SellAll() {
+  public async SellAll(price?: number) {
     const balance = await this.client.fetchBalance();
     const free: number = balance[this.target_name].free;
-    return await this.Sell(free);
+    if (free > 0) {
+      return await this.Sell(free, price);
+    }
+    return null;
   }
 }
