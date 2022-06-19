@@ -24,7 +24,7 @@ class TestContract {
     'SHORT': 0,
   };
 
-  private assets_price = {
+  private assets_funds = {
     'LONG': 0,
     'SHORT': 0,
   };
