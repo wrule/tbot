@@ -44,6 +44,7 @@ class TestContract {
       this.funds -= in_assets;
       const out_assets = in_assets / price;
       this.assets[direction] += out_assets;
+      this.assets_funds[direction] += in_assets;
       this.deposit -= fee;
     }
     return null;
