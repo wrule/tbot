@@ -19,8 +19,12 @@ class TestContract {
   private fee_multiplier!: number;
   private transactions!: ITransaction[];
 
-
   private assets = {
+    'LONG': 0,
+    'SHORT': 0,
+  };
+
+  private assets_price = {
     'LONG': 0,
     'SHORT': 0,
   };
