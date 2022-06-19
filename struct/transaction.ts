@@ -51,3 +51,9 @@ interface ITransaction {
    */
   out_amount: number;
 }
+
+export
+type ReturnTransaction = (ITransaction | null);
+
+export
+type ReturnTransactionAS = (Promise<ReturnTransaction> | ReturnTransaction);
