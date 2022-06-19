@@ -25,6 +25,10 @@ class TestContract {
     'SHORT': 0,
   };
 
+  public Check(price: number) {
+
+  }
+
   public Open(
     direction: Direction,
     in_assets: number,
