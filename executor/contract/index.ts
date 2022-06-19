@@ -2,5 +2,9 @@
 
 export
 interface IContractExecutor {
-  Open():
+  Open(
+    in_asset: number,
+    price?: number,
+    time?: number,
+  ):
 }
