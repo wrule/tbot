@@ -45,11 +45,11 @@ class TestContract {
     price: number,
     time: number,
   ) {
-    // const fee = in_assets * this.fee;
-    // if (in_assets <= this.funds && this.deposit > fee) {
-    //   const out_assets = in_assets / price;
-    //   this.assets[direction] += out_assets;
-    // }
+    if (in_assets <= this.assets[direction]) {
+      this.assets[direction] -= in_assets;
+      const out_assets = in_assets * price;
+      this.funds += out_assets;
+    }
     return null;
   }
 
