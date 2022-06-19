@@ -1,3 +1,4 @@
+import { Side } from '../../struct/common';
 import { ITransaction } from '../../struct/transaction';
 
 export
@@ -16,6 +17,25 @@ class TestContract {
   private deposit!: number;
   private fee_multiplier!: number;
   private transactions!: ITransaction[];
+
+  private get funds() {
+    return this.deposit * this.lever;
+  }
+
+
+
+  public Open(
+    side: Side,
+    in_asset: number,
+    price?: number,
+    time?: number,
+  ) {
+    const fee = in_asset * this.fee;
+    if (in_asset <= this.funds && this.deposit > fee) {
+
+    }
+    return null;
+  }
 
   public Reset() {
     this.deposit = this.init_deposit;
